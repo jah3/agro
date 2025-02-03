@@ -5,12 +5,12 @@ import CheckoutPage from "../pages/CheckoutPage.jsx";
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/store" element={<HomePage />} />
-            <Route path="/store/:category" element={<HomePage />} />
-            <Route path="/store/:category/:subcategory" element={<HomePage />} />
-            <Route path="/product/:id" element={<HomePage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/agro" element={<HomePage />} />
+            <Route path="/agro/store" element={<HomePage />} />
+            <Route path="/agro/store/:category" element={<HomePage />} />
+            <Route path="/agro/store/:category/:subcategory" element={<HomePage />} />
+            <Route path="/agro/product/:id" element={<HomePage />} />
+            <Route path="/agro/checkout" element={<CheckoutPage />} />
             {/*<Route path="/order-confirmation" element={<OrderConfirmation />} />*/}
         </Routes>
     );
