@@ -4,7 +4,7 @@ import { Edit2 } from "lucide-react";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 import BottomNavigationBar from "../components/BottomNavigationBar";
-import emailjs from "@emailjs/browser"; // Importă EmailJS
+import emailjs from "emailjs-com";
 
 const CheckoutPage = () => {
     const location = useLocation();
