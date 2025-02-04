@@ -73,12 +73,9 @@ const CheckoutPage = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        const serviceID = "service_7chdx0n";
-        const templateID = "template_ekd632u";
-        const publicKey = "k6AWco3ffo4x5N4Ol";
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
 
         const emailData = {
             name: formData.name,
@@ -88,21 +85,21 @@ const CheckoutPage = () => {
             email: formData.email || "Не указан",
             notes: formData.notes || "Нет примечаний",
             paymentMethod: formData.paymentMethod,
-            cartItems: localCartItems.map(item => `${item.name} (x${item.quantity}) - ${item.price}₽`).join("\n"),
+            cartItems: localCartItems
+                .map((item) => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`)
+                .join("\n"),
             subtotal: computedTotalAmount,
             delivery: deliveryCost,
-            total: total
+            total
         };
 
-        console.log("Email data:", emailData);
-
         try {
-            const response = await emailjs.send(serviceID, templateID, emailData, publicKey);
-            console.log("Email sent successfully:", response);
-            alert("Заказ успешно оформлен! Мы свяжемся с вами в ближайшее время.");
+            await emailjs.send("service_ymlo1ov", "template_ekd632u", emailData, "h5e5HdKGCGmr7Vm6L");
+            alert("Заказ успешно оформлен! Мы свяжемся с вами.");
+            navigate("/");
         } catch (error) {
-            console.error("Ошибка отправки заказа:", error);
-            alert(`Произошла ошибка при оформлении заказа: ${error.text}`);
+            console.error("Ошибка отправки:", error);
+            alert("Произошла ошибка при оформлении заказа. Пожалуйста, попробуйте снова.");
         }
     };
     const handleChange = (e) => {
