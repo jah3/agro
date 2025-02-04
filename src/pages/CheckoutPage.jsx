@@ -41,11 +41,6 @@ const CheckoutPage = () => {
     const [editingProductId, setEditingProductId] = useState(null);
     const [editedQuantity, setEditedQuantity] = useState(1);
 
-    // Configurația EmailJS – înlocuiește cu datele tale
-    const serviceID = "YOUR_EMAILJS_SERVICE_ID";
-    const templateID = "YOUR_EMAILJS_TEMPLATE_ID";
-    const publicKey = "YOUR_EMAILJS_PUBLIC_KEY";
-
     // Determinăm dacă este versiunea mobilă pentru a schimba ordinea blocurilor
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     useEffect(() => {
@@ -94,7 +89,12 @@ const CheckoutPage = () => {
         };
 
         try {
-            await emailjs.send("service_ymlo1ov", "template_ekd632u", emailData, "h5e5HdKGCGmr7Vm6L");
+            await emailjs.send(
+                import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+                emailData,
+                import.meta.env.VITE_APP_EMAILJS_EMAIL_DATA_KEY
+            );
             alert("Заказ успешно оформлен! Мы свяжемся с вами.");
             navigate("/");
         } catch (error) {
@@ -239,9 +239,9 @@ const CheckoutPage = () => {
                                                     className="form-check-input"
                                                     type="radio"
                                                     name="paymentMethod"
-                                                    value="card"
+                                                    value="Переводом на банковскую карту при получении"
                                                     id="paymentCard"
-                                                    checked={formData.paymentMethod === "card"}
+                                                    checked={formData.paymentMethod === "Переводом на банковскую карту при получении"}
                                                     onChange={handleChange}
                                                     required
                                                 />
@@ -254,9 +254,9 @@ const CheckoutPage = () => {
                                                     className="form-check-input"
                                                     type="radio"
                                                     name="paymentMethod"
-                                                    value="bank"
+                                                    value="Банковской картой при получении"
                                                     id="paymentBank"
-                                                    checked={formData.paymentMethod === "bank"}
+                                                    checked={formData.paymentMethod === "Банковской картой при получении"}
                                                     onChange={handleChange}
                                                     required
                                                 />
@@ -269,9 +269,9 @@ const CheckoutPage = () => {
                                                     className="form-check-input"
                                                     type="radio"
                                                     name="paymentMethod"
-                                                    value="cash"
+                                                    value="Наличными курьеру при получении"
                                                     id="paymentCash"
-                                                    checked={formData.paymentMethod === "cash"}
+                                                    checked={formData.paymentMethod === "Наличными курьеру при получении"}
                                                     onChange={handleChange}
                                                     required
                                                 />
