@@ -94,7 +94,7 @@ const CheckoutPage = () => {
         };
 
         try {
-            await emailjs.send("service_ymlo1ov", "template_qigxgc5", emailData, "h5e5HdKGCGmr7Vm6L");
+            await emailjs.send("service_ymlo1ov", "template_ekd632u", emailData, "h5e5HdKGCGmr7Vm6L");
             alert("Заказ успешно оформлен! Мы свяжемся с вами.");
             navigate("/");
         } catch (error) {
