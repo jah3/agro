@@ -151,7 +151,7 @@ const BottomNavigationBar = ({
                             {
                                 icon: Home,
                                 label: "Магазин",
-                                action: () => navigate("/")
+                                action: () => navigate("/store")
                             },
                             {
                                 icon: Search,
