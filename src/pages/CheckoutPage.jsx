@@ -4,6 +4,7 @@ import { Edit2 } from "lucide-react";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 import BottomNavigationBar from "../components/BottomNavigationBar";
+import emailjs from "@emailjs/browser"; // Importă EmailJS
 
 const CheckoutPage = () => {
     const location = useLocation();
@@ -77,12 +78,15 @@ const CheckoutPage = () => {
         if (!validateForm()) return;
 
         const emailData = {
-            ...formData,
+            name: formData.name,
+            region: formData.region,
+            address: formData.address,
+            phone: formData.phone,
+            email: formData.email || "Не указан",
+            notes: formData.notes || "Нет примечаний",
+            paymentMethod: formData.paymentMethod,
             cartItems: localCartItems
-                .map(
-                    (item) =>
-                        `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`
-                )
+                .map((item) => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`)
                 .join("\n"),
             subtotal: computedTotalAmount,
             delivery: deliveryCost,
@@ -90,16 +94,14 @@ const CheckoutPage = () => {
         };
 
         try {
-            // Aici se efectuează trimiterea prin EmailJS (configurați corespunzător)
-            await emailjs.send(serviceID, templateID, emailData, publicKey);
-            alert("Заказ успешно оформлен! Мы свяжемся с вами для подтверждения.");
+            await emailjs.send("service_ymlo1ov", "template_qigxgc5", emailData, "h5e5HdKGCGmr7Vm6L");
+            alert("Заказ успешно оформлен! Мы свяжемся с вами.");
             navigate("/");
         } catch (error) {
             console.error("Ошибка отправки:", error);
             alert("Произошла ошибка при оформлении заказа. Пожалуйста, попробуйте снова.");
         }
     };
-
     const handleChange = (e) => {
         setFormData((prevData) => ({
             ...prevData,
