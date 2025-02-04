@@ -85,12 +85,12 @@ const CheckoutPage = () => {
             email: formData.email || "Не указан",
             notes: formData.notes || "Нет примечаний",
             paymentMethod: formData.paymentMethod,
-            cartItems: localCartItems
-                .map((item) => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`)
-                .join("\n"),
-            subtotal: computedTotalAmount,
-            delivery: deliveryCost,
-            total
+            cartItems: localCartItems.map((item) =>
+                `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`
+            ).join("\n"),
+            subtotal: computedTotalAmount.toString(),
+            delivery: deliveryCost.toString(),
+            total: total.toString()
         };
 
         try {
