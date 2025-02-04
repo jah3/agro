@@ -1,38 +1,38 @@
 {
   "Декоративные кустарники": {
-    "image": "/public/categories/decorative-shrubs.jpg",
+    "image": "/categories/decorative-shrubs.jpg",
     "subcategories": {}
   },
   "Колоновидные деревья": {
-    "image": "/public/categories/columnar-trees.jpg",
+    "image": "/categories/columnar-trees.jpg",
     "subcategories": {}
   },
   "Крупномеры": {
-    "image": "/public/categories/large-trees.jpg",
+    "image": "/categories/large-trees.jpg",
     "subcategories": {}
   },
   "Лиственные деревья": {
-    "image": "/public/categories/deciduous-trees.jpg",
+    "image": "/categories/deciduous-trees.jpg",
     "subcategories": {}
   },
   "Плодовые деревья": {
-    "image": "/public/categories/fruit-trees.jpg",
+    "image": "/categories/fruit-trees.jpg",
     "subcategories": {}
   },
   "Плодовые кустарники": {
-    "image": "/public/categories/fruit-shrubs.jpg",
+    "image": "/categories/fruit-shrubs.jpg",
     "subcategories": {}
   },
   "Цветы": {
-    "image": "/public/categories/flowers.jpg",
+    "image": "/categories/flowers.jpg",
     "subcategories": {
       "Древовидные пионы": {
-        "image": "/public/subcategories/tree-peonies.jpg",
+        "image": "/subcategories/tree-peonies.jpg",
         "products": [
           {
             "id": "1",
             "name": "Пион травянистый Золотая Росинь",
-            "image": "/public/products/pion-zolotaya-rosin.jpg",
+            "image": "/products/pion-zolotaya-rosin.jpg",
             "description": "...",
             "categories": ["Травянистые пионы"],
             "min_order": "5000",
@@ -59,7 +59,7 @@
           {
             "id": "2",
             "name": "Пион травянистый Золотая Росинь 2",
-            "image": "/public/products/pion-zolotaya-rosin-2.jpg",
+            "image": "/products/pion-zolotaya-rosin-2.jpg",
             "description": "...",
             "categories": ["Травянистые пионы"],
             "min_order": "5000",
@@ -87,12 +87,12 @@
         ]
       },
       "Саженцы роз": {
-        "image": "/public/subcategories/rose-seedlings.jpg",
+        "image": "/subcategories/rose-seedlings.jpg",
         "products": [
           {
             "id": "3",
             "name": "Роза чайно-гибридная Глория Дей",
-            "image": "/public/products/roza-gloria-day.jpg",
+            "image": "/products/roza-gloria-day.jpg",
             "description": "...",
             "categories": ["Розы"],
             "min_order": "1500 рублей",
@@ -104,7 +104,7 @@
           {
             "id": "4",
             "name": "Роза плетистая Нью Доун",
-            "image": "/public/products/roza-new-dawn.jpg",
+            "image": "/products/roza-new-dawn.jpg",
             "description": "...",
             "categories": ["Розы"],
             "min_order": "2500 рублей",
@@ -116,12 +116,12 @@
         ]
       },
       "Травянистые пионы": {
-        "image": "/public/subcategories/herbaceous-peonies.jpg",
+        "image": "/subcategories/herbaceous-peonies.jpg",
         "products": [
           {
             "id": "5",
             "name": "Пион молочноцветковый Фестива Максима",
-            "image": "/public/products/pion-festiva-maxima.jpg",
+            "image": "/products/pion-festiva-maxima.jpg",
             "description": "...",
             "categories": ["Травянистые пионы"],
             "min_order": "2000 рублей",
@@ -133,7 +133,7 @@
           {
             "id": "6",
             "name": "Пион молочноцветковый Карл Розенфельд",
-            "image": "/public/products/pion-karl-rosenfeld.jpg",
+            "image": "/products/pion-karl-rosenfeld.jpg",
             "description": "...",
             "categories": ["Травянистые пионы"],
             "min_order": "2500 рублей",
