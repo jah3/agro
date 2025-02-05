@@ -273,9 +273,14 @@ const NavigationBar = ({
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
+                            <a
+                                className="nav-link"
+                                onClick={() => navigate("/dostavka")}
+                                style={{color: "#FFF", cursor: "pointer"}}
+                            >
                                 ДОСТАВКА И ОПЛАТА
                             </a>
+
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#" style={{color: "#FFF"}}>

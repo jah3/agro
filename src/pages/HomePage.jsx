@@ -215,7 +215,10 @@ const HomePage = () => {
 
             <main className="flex-grow-1">
                 <div className="container mt-4 mb-5">
-                    {isLoading ? (
+                    {location.pathname === '/dostavka' ? (
+                        // Afișăm doar Dostavka dacă ruta este /dostavka
+                        <Dostavka />
+                    ) : isLoading ? (
                         <div className="text-center my-5">
                             <div className="spinner-border text-success" role="status">
                                 <span className="visually-hidden">Loading...</span>

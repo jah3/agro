@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
 const Footer = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });
+
     return (
-        <footer className="text-white py-5" style={{ backgroundColor: "#5E8D66" }}>
+        <footer className="text-white py-5" style={{backgroundColor: "#5E8D66"}}>
             <div className="container">
                 <div className="row g-4">
                     {/* Coloana 1 - Informații comandă */}
@@ -59,7 +67,9 @@ const Footer = () => {
                                 <h5>СТРАНИЦЫ</h5>
                                 <ul className="list-unstyled">
                                     <li><a href="#" className="text-white text-decoration-none">Каталог</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Доставка и оплата</a></li>
+                                    <li><a onClick={() => navigate("/dostavka")}
+                                           style={{color: "#FFF", cursor: "pointer"}}
+                                           className="text-white text-decoration-none">Доставка и оплата</a></li>
                                     <li><a href="#" className="text-white text-decoration-none">О нас</a></li>
                                     <li><a href="#" className="text-white text-decoration-none">Гарантии</a></li>
                                     <li><a href="#" className="text-white text-decoration-none">Контакты</a></li>
@@ -70,13 +80,18 @@ const Footer = () => {
                             <div className="col-6">
                                 <h5>ТОВАРЫ</h5>
                                 <ul className="list-unstyled">
-                                    <li><a href="#" className="text-white text-decoration-none">Плодовые деревья</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Колоновидные деревья</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Плодовые кустарники</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Лиственные деревья</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Плодовые деревья</a>
+                                    </li>
+                                    <li><a href="#" className="text-white text-decoration-none">Колоновидные деревья</a>
+                                    </li>
+                                    <li><a href="#" className="text-white text-decoration-none">Плодовые кустарники</a>
+                                    </li>
+                                    <li><a href="#" className="text-white text-decoration-none">Лиственные деревья</a>
+                                    </li>
                                     <li><a href="#" className="text-white text-decoration-none">Цветы</a></li>
                                     <li><a href="#" className="text-white text-decoration-none">Крупномеры</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Декоративные кустарники</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Декоративные
+                                        кустарники</a></li>
                                 </ul>
                             </div>
                         </div>
