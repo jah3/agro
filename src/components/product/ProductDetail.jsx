@@ -26,6 +26,17 @@ const ProductDetail = ({product, handleBack, addToCart}) => {
         return selectedService === 'with-planting' ? Math.round(basePrice * 1.3) : basePrice;
     };
 
+    const getYearLabel = (age) => {
+        if (age % 10 === 1 && age % 100 !== 11) {
+            return "год";
+        } else if ([2, 3, 4].includes(age % 10) && ![12, 13, 14].includes(age % 100)) {
+            return "года";
+        } else {
+            return "лет";
+        }
+    };
+
+
     return (
         <div>
 
@@ -55,31 +66,38 @@ const ProductDetail = ({product, handleBack, addToCart}) => {
 
                         <div className="mb-3">
                             <label className="form-label">Возраст:</label>
-                            <select
-                                className="form-select"
-                                value={selectedAge}
-                                onChange={(e) => setSelectedAge(parseInt(e.target.value))}
-                            >
-                                {Object.keys(product.priceByAge).map(age => (
-                                    <option key={age} value={age}>{age} лет</option>
-                                ))}
-                            </select>
+                            <div className="d-flex gap-2 flex-wrap">
+                                {Object.entries(product.priceByAge).map(([age, price]) => {
+                                    const numericAge = parseInt(age);
+                                    return (
+                                        <button
+                                            key={age}
+                                            className={`btn ${selectedAge === numericAge ? 'btn-success' : 'btn-outline-secondary'}`}
+                                            onClick={() => setSelectedAge(numericAge)}
+                                        >
+                                            {numericAge} {getYearLabel(numericAge)} ({price} руб)
+                                        </button>
+                                    );
+                                })}
+                            </div>
                         </div>
+
+
 
                         <div className="mb-4">
                             <label className="form-label">Услуги:</label>
                             <div className="d-flex gap-2">
                                 <button
-                                    className={`btn ${selectedService === 'no-planting' ? 'btn-primary' : 'btn-outline-secondary'}`}
+                                    className={`btn ${selectedService === 'no-planting' ? 'btn-success' : 'btn-outline-secondary'}`}
                                     onClick={() => setSelectedService('no-planting')}
                                 >
                                     Посадка не нужна
                                 </button>
                                 <button
-                                    className={`btn ${selectedService === 'with-planting' ? 'btn-primary' : 'btn-outline-secondary'}`}
+                                    className={`btn ${selectedService === 'with-planting' ? 'btn-success' : 'btn-outline-secondary'}`}
                                     onClick={() => setSelectedService('with-planting')}
                                 >
-                                    С посадкой +30%
+                                    С посадкой +30% от стоимости
                                 </button>
                             </div>
                         </div>

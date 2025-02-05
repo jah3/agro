@@ -127,7 +127,11 @@ const HomePage = () => {
         setCartItems(prevItems => {
             const updatedItems = existingItem
                 ? prevItems.map(item =>
-                    item.id === newItem.id ? { ...item, quantity: item.quantity + newItem.quantity } : item
+                    item.id === newItem.id &&
+                    item.age === newItem.age &&
+                    item.serviceType === newItem.serviceType
+                        ? { ...item, quantity: item.quantity + newItem.quantity }
+                        : item
                 )
                 : [...prevItems, newItem];
 

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Edit2 } from "lucide-react";
+import {useState, useEffect} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {Edit2} from "lucide-react";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 import BottomNavigationBar from "../components/BottomNavigationBar";
@@ -10,14 +10,11 @@ const CheckoutPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Obținem datele din location.state; dacă nu există, redirecționăm către pagina principală
-    const { cartItems: passedCartItems, totalAmount: passedTotalAmount } =
-    location.state || { cartItems: [], totalAmount: 0 };
+    const {cartItems: passedCartItems, totalAmount: passedTotalAmount} =
+    location.state || {cartItems: [], totalAmount: 0};
 
-    // Stare locală pentru coș, pentru a permite editarea cantității
     const [localCartItems, setLocalCartItems] = useState(passedCartItems || []);
 
-    // Calculăm suma totală pe baza localCartItems
     const computedTotalAmount = localCartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
@@ -25,7 +22,6 @@ const CheckoutPage = () => {
     const deliveryCost = 500;
     const total = computedTotalAmount + deliveryCost;
 
-    // Starea formularului cu datele personale și selectarea metodei de plată
     const [formData, setFormData] = useState({
         name: "",
         region: "Москва",
@@ -37,11 +33,9 @@ const CheckoutPage = () => {
     });
     const [errors, setErrors] = useState({});
 
-    // Starea pentru editarea parametrilor unui produs (de exemplu, cantitatea)
     const [editingProductId, setEditingProductId] = useState(null);
     const [editedQuantity, setEditedQuantity] = useState(1);
 
-    // Determinăm dacă este versiunea mobilă pentru a schimba ordinea blocurilor
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     useEffect(() => {
         if (!localCartItems?.length) {
@@ -81,12 +75,13 @@ const CheckoutPage = () => {
             notes: formData.notes || "Нет примечаний",
             paymentMethod: formData.paymentMethod,
             cartItems: localCartItems.map((item) =>
-                `${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб`
+                `${item.name} (x${item.quantity}), ${item.age} ${getYearLabel(item.age)}, ${item.serviceType === 'with-planting' ? 'С посадкой (+30%)' : 'Без посадки'} - ${item.price * item.quantity} руб`
             ).join("\n"),
             subtotal: computedTotalAmount.toString(),
             delivery: deliveryCost.toString(),
             total: total.toString()
         };
+
 
         try {
             await emailjs.send(
@@ -120,7 +115,7 @@ const CheckoutPage = () => {
         setLocalCartItems((prevItems) =>
             prevItems.map((item) =>
                 item.id === editingProductId
-                    ? { ...item, quantity: Number(editedQuantity) }
+                    ? {...item, quantity: Number(editedQuantity)}
                     : item
             )
         );
@@ -131,10 +126,20 @@ const CheckoutPage = () => {
         setEditingProductId(null);
     };
 
+    const getYearLabel = (age) => {
+        if (age % 10 === 1 && age % 100 !== 11) {
+            return "год";
+        } else if ([2, 3, 4].includes(age % 10) && ![12, 13, 14].includes(age % 100)) {
+            return "года";
+        } else {
+            return "лет";
+        }
+    };
+
     return (
         <div className="d-flex flex-column min-vh-100">
             {/* Navigația de sus */}
-            <NavigationBar />
+            <NavigationBar/>
 
             <main className="flex-grow-1">
                 <div className="container py-5">
@@ -150,7 +155,7 @@ const CheckoutPage = () => {
                             */}
                             {/* Cardul cu informații despre produse și sume – fundalul modificat la light gray */}
                             <div className="col-md-6 order-1 order-md-2">
-                                <div className="card p-4 shadow-sm" style={{ backgroundColor: "#f7f7f7" }}>
+                                <div className="card p-4 shadow-sm" style={{backgroundColor: "#f7f7f7"}}>
                                     {/* Titlul cu coloane */}
                                     <div className="d-flex justify-content-between border-bottom pb-2 mb-3">
                                         <h5 className="mb-0">Товар</h5>
@@ -160,15 +165,25 @@ const CheckoutPage = () => {
                                     {/* Lista de produse */}
                                     {localCartItems.map((item, index) => (
                                         <div key={index} className="py-2 border-bottom">
-                                            <div className="d-flex justify-content-between align-items-center">
+                                            <div
+                                                className="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
                                                 <div>
-                                                    <p className="mb-0">{item.name}</p>
-                                                    <small className="text-muted">
+                                                    <p className="mb-1 fw-bold">{item.name}</p>
+                                                    <small className="text-muted d-block">
+                                                        <span className="text-capitalize">
+                                                            {item.serviceType === 'with-planting'
+                                                                ? "С посадкой (+30%)"
+                                                                : "Без посадки"}
+                                                        </span>, {item.age} {getYearLabel(item.age)}
+                                                    </small>
+                                                    <small className="text-muted d-block">
                                                         {item.quantity} × {item.price} руб
                                                     </small>
                                                 </div>
-                                                <div>{item.quantity * item.price} руб</div>
+                                                <div className="fw-bold text-end">{item.quantity * item.price} руб</div>
                                             </div>
+
+
                                             {/* Secțiune pentru modificarea parametrilor produsului */}
                                             <div className="mt-2">
                                                 {editingProductId === item.id ? (
@@ -177,7 +192,7 @@ const CheckoutPage = () => {
                                                             type="number"
                                                             min="1"
                                                             className="form-control form-control-sm me-2"
-                                                            style={{ width: "80px" }}
+                                                            style={{width: "80px"}}
                                                             value={editedQuantity}
                                                             onChange={(e) =>
                                                                 setEditedQuantity(e.target.value)
@@ -204,7 +219,7 @@ const CheckoutPage = () => {
                                                         className="btn btn-link p-0 text-decoration-none"
                                                         onClick={() => startEditing(item)}
                                                     >
-                                                        <Edit2 size={16} className="me-1" /> Изменить параметры
+                                                        <Edit2 size={16} className="me-1"/> Изменить параметры
                                                     </button>
                                                 )}
                                             </div>
@@ -221,10 +236,10 @@ const CheckoutPage = () => {
                                             <span>Доставка:</span>
                                             <span>{deliveryCost} руб</span>
                                         </div>
-                                        <hr />
+                                        <hr/>
                                         <div className="d-flex justify-content-between fs-5 fw-bold">
                                             <span>Итого:</span>
-                                            <span className="px-3 py-1" style={{  color: "#198754" }}>
+                                            <span className="px-3 py-1" style={{color: "#198754"}}>
                                                 {total} руб
                                             </span>
                                         </div>
@@ -389,8 +404,8 @@ const CheckoutPage = () => {
             </main>
 
             {/* Navigația de jos și footer */}
-            <BottomNavigationBar />
-            <Footer />
+            <BottomNavigationBar/>
+            <Footer/>
         </div>
     );
 };
