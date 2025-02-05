@@ -189,7 +189,7 @@ const NavigationBar = ({
                 }}
             >
                 {/* Brand (Desktop) */}
-                <a href="#" className="d-none d-lg-block">
+                <a href="/store" className="d-none d-lg-block">
                     <img
                         src="/logo/logonav.png"
                         height="40"
