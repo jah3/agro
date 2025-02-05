@@ -9,6 +9,7 @@ import CategoryGrid from "../components/product/CategoryGrid";
 import SubcategoryGrid from "../components/product/SubcategoryGrid";
 import ProductGrid from "../components/product/ProductGrid";
 import ProductDetail from "../components/product/ProductDetail";
+import Dostavka from "./Dostavka.jsx";
 
 const HomePage = () => {
     const { category: urlCategory, subcategory: urlSubcategory, id: productId } = useParams();
@@ -215,8 +216,7 @@ const HomePage = () => {
 
             <main className="flex-grow-1">
                 <div className="container mt-4 mb-5">
-                    {location.pathname === '/dostavka' ? (
-                        // Afișăm doar Dostavka dacă ruta este /dostavka
+                    {location.pathname.includes('/dostavka') ? (
                         <Dostavka />
                     ) : isLoading ? (
                         <div className="text-center my-5">

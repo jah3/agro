@@ -280,7 +280,6 @@ const NavigationBar = ({
                             >
                                 ДОСТАВКА И ОПЛАТА
                             </a>
-
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#" style={{color: "#FFF"}}>

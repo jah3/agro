@@ -3,8 +3,6 @@ import {Truck, CreditCard, MapPin, Clock, CheckCircle} from 'react-feather'; // 
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 import BottomNavigationBar from "../components/BottomNavigationBar.jsx";
-import productsData from "../data/products.json";
-import HomePage from "./HomePage.jsx";
 
 const Dostavka = () => {
     return (
