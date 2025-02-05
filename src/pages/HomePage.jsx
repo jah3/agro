@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie';
 import NavigationBar from "../components/NavigationBar";
 import productsData from "../data/products.json";
@@ -13,6 +13,7 @@ import ProductDetail from "../components/product/ProductDetail";
 const HomePage = () => {
     const { category: urlCategory, subcategory: urlSubcategory, id: productId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState(null);
@@ -22,6 +23,29 @@ const HomePage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [showNotification, setShowNotification] = useState(false);
+
+    // Effect to detect back button press
+    useEffect(() => {
+        const handlePopState = () => {
+            if (selectedProduct) {
+                navigate(`/store/${encodeURIComponent(selectedCategory)}/${encodeURIComponent(selectedSubcategory)}`);
+                setSelectedProduct(null);
+            } else if (selectedSubcategory) {
+                navigate(`/store/${encodeURIComponent(selectedCategory)}`);
+                setSelectedSubcategory(null);
+            } else if (selectedCategory) {
+                navigate("/store");
+                setSelectedCategory(null);
+            }
+        };
+
+        window.onpopstate = handlePopState;
+
+        // Clean up the event listener
+        return () => {
+            window.onpopstate = null;
+        };
+    }, [selectedCategory, selectedSubcategory, selectedProduct, navigate]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
