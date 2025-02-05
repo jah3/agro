@@ -191,7 +191,7 @@ const NavigationBar = ({
                 {/* Brand (Desktop) */}
                 <a href="#" className="d-none d-lg-block">
                     <img
-                        src="/public/logo/logonav.png"
+                        src="/logo/logonav.png"
                         height="40"
                         alt="Садовый Рай"
                         className="d-inline-block align-top me-2"
@@ -220,7 +220,7 @@ const NavigationBar = ({
 
                     <a href="/store" className="d-block d-lg-none mx-auto">
                         <img
-                            src="/public/logo/logonav.png"
+                            src="/logo/logonav.png"
                             height="45"
                             alt="Садовый Рай"
                             className="d-inline-block align-top"
