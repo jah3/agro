@@ -7,7 +7,7 @@ const NavigationBar = ({
                            cartItems = [],
                            addToCart,
                            removeFromCart,
-                           productsData = {}
+                           productsData = {},
                        }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -16,7 +16,10 @@ const NavigationBar = ({
     const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
 
-    const totalAmount = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const totalAmount = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+    );
 
     useEffect(() => {
         Cookies.set("cartItems", JSON.stringify(cartItems), {expires: 7});
@@ -27,8 +30,8 @@ const NavigationBar = ({
         checkMobile();
 
         // Add resize listener
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
     }, [cartItems]);
 
     const searchProducts = (query) => {
@@ -62,15 +65,23 @@ const NavigationBar = ({
 
     const handleRemoveFromCart = (item) => {
         removeFromCart(item);
-        const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
+        const updatedCartItems = cartItems.filter(
+            (cartItem) => cartItem.id !== item.id
+        );
         Cookies.set("cartItems", JSON.stringify(updatedCartItems), {expires: 7});
     };
 
     return (
         <div>
             {/* Search Bar and Cart - Desktop */}
-            <div className="d-none d-lg-flex justify-content-center py-2 bg-light" style={{backgroundColor: "#C2D6C5"}}>
-                <div className="input-group" style={{maxWidth: "600px", width: "100%", position: "relative"}}>
+            <div
+                className="d-none d-lg-flex justify-content-center py-2 bg-light"
+                style={{backgroundColor: "#C2D6C5"}}
+            >
+                <div
+                    className="input-group"
+                    style={{maxWidth: "600px", width: "100%", position: "relative"}}
+                >
                     <input
                         type="text"
                         className="form-control"
@@ -81,16 +92,19 @@ const NavigationBar = ({
                     />
 
                     {searchResults.length > 0 && (
-                        <div className="search-results-dropdown" style={{
-                            position: "absolute",
-                            top: "100%",
-                            width: "100%",
-                            zIndex: 1000,
-                            backgroundColor: "white",
-                            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                            maxHeight: "400px",
-                            overflowY: "auto",
-                        }}>
+                        <div
+                            className="search-results-dropdown"
+                            style={{
+                                position: "absolute",
+                                top: "100%",
+                                width: "100%",
+                                zIndex: 1000,
+                                backgroundColor: "white",
+                                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                                maxHeight: "400px",
+                                overflowY: "auto",
+                            }}
+                        >
                             {searchResults.map((product, index) => (
                                 <div
                                     key={index}
@@ -101,7 +115,12 @@ const NavigationBar = ({
                                     <img
                                         src={product.image}
                                         alt={product.name}
-                                        style={{width: "50px", height: "50px", objectFit: "cover", marginRight: "15px"}}
+                                        style={{
+                                            width: "50px",
+                                            height: "50px",
+                                            objectFit: "cover",
+                                            marginRight: "15px",
+                                        }}
                                     />
                                     <div>
                                         <div className="font-weight-bold">{product.name}</div>
@@ -122,7 +141,10 @@ const NavigationBar = ({
 
                     {/* În NavigationBar.jsx - secțiunea desktop */}
                     <div className="d-flex align-items-center ms-3">
-                        <Heart className="icon" style={{color: "#9F684B", marginRight: "10px"}}/>
+                        <Heart
+                            className="icon"
+                            style={{color: "#9F684B", marginRight: "10px"}}
+                        />
                         <div
                             className="position-relative"
                             onClick={() => setIsCartOpen(!isCartOpen)}
@@ -167,9 +189,15 @@ const NavigationBar = ({
                 }}
             >
                 {/* Brand (Desktop) */}
-                <a className="navbar-brand d-none d-lg-block" href="#" style={{color: "#FFF"}}>
-                    AGRO
+                <a href="#" className="d-none d-lg-block">
+                    <img
+                        src="/public/logo/logonav.png"
+                        height="40"
+                        alt="Садовый Рай"
+                        className="d-inline-block align-top me-2"
+                    />
                 </a>
+
 
                 {/* Butoane pentru mobil */}
                 <div className="d-flex justify-content-between w-100 d-lg-none">
@@ -187,18 +215,34 @@ const NavigationBar = ({
                         )}
                     </button>
 
+                    {/* Brand (Mobile - Centered) */}
+
+
+                    <a href="/store" className="d-block d-lg-none mx-auto">
+                        <img
+                            src="/public/logo/logonav.png"
+                            height="45"
+                            alt="Садовый Рай"
+                            className="d-inline-block align-top"
+                        />
+                    </a>
+
                     {/* Buton coș (Mobil) */}
                     <div
                         className="position-relative"
                         onClick={() => setIsCartOpen(!isCartOpen)}
-                        style={{marginRight: "15px"}}
+                        style={{
+                            marginRight: "15px",
+                            display: "flex",
+                            alignItems: "center", // This centers the icon vertically
+                        }}
                     >
                         <ShoppingCart style={{color: "#FFF", cursor: "pointer"}}/>
                         {cartItems.length > 0 && (
                             <div
                                 style={{
                                     position: "absolute",
-                                    top: "-8px",
+                                    top: "-8px", // Position the badge on top of the icon
                                     right: "-8px",
                                     backgroundColor: "#FF6347",
                                     color: "#FFF",
@@ -206,8 +250,8 @@ const NavigationBar = ({
                                     width: "20px",
                                     height: "20px",
                                     display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
+                                    alignItems: "center", // Center the badge's text vertically
+                                    justifyContent: "center", // Center the badge's text horizontally
                                     fontSize: "12px",
                                 }}
                             >
@@ -218,7 +262,10 @@ const NavigationBar = ({
                 </div>
 
                 {/* Elementele de navigare */}
-                <div className={`collapse navbar-collapse ${isSidebarOpen ? "show" : ""}`} id="navbarNav">
+                <div
+                    className={`collapse navbar-collapse ${isSidebarOpen ? "show" : ""}`}
+                    id="navbarNav"
+                >
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
                             <a className="nav-link" href="/store" style={{color: "#FFF"}}>
@@ -282,7 +329,7 @@ const NavigationBar = ({
                         padding: "20px",
                         zIndex: 1000,
                         transition: "width 0.3s ease-in-out",
-                        overflowY: "auto"
+                        overflowY: "auto",
                     }}
                 >
                     <button
@@ -303,18 +350,26 @@ const NavigationBar = ({
                     <h4>Корзина</h4>
                     <ul style={{listStyleType: "none", padding: 0}}>
                         {cartItems.map((item, index) => (
-                            <li key={index} className="d-flex justify-content-between align-items-center mb-3">
+                            <li
+                                key={index}
+                                className="d-flex justify-content-between align-items-center mb-3"
+                            >
                                 <div className="d-flex align-items-center">
                                     <img
                                         src={item.image}
                                         alt={item.name}
-                                        style={{width: "40px", height: "40px", marginRight: "10px"}}
+                                        style={{
+                                            width: "40px",
+                                            height: "40px",
+                                            marginRight: "10px",
+                                        }}
                                     />
                                     <div>
                                         <span>{item.name}</span>
                                         <div>
                                             <small>
-                                                {item.price} руб x {item.quantity} (Возраст: {item.age} лет)
+                                                {item.price} руб x {item.quantity} (Возраст: {item.age}{" "}
+                                                лет)
                                             </small>
                                         </div>
                                     </div>
@@ -334,12 +389,17 @@ const NavigationBar = ({
                     </p>
                     <button
                         className="btn btn-success w-100"
-                        onClick={() => navigate('/checkout', {
-                            state: {
-                                cartItems,
-                                totalAmount: cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-                            }
-                        })}
+                        onClick={() =>
+                            navigate("/checkout", {
+                                state: {
+                                    cartItems,
+                                    totalAmount: cartItems.reduce(
+                                        (acc, item) => acc + item.price * item.quantity,
+                                        0
+                                    ),
+                                },
+                            })
+                        }
                     >
                         Оформление заказа
                     </button>
