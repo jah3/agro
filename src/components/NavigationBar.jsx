@@ -308,13 +308,17 @@ const NavigationBar = ({
                                 КОНТАКТЫ
                             </a>
                         </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <a className="nav-link" href="#" style={{color: "#FFF"}}>*/}
+                        {/*        СТАТЬИ*/}
+                        {/*    </a>*/}
+                        {/*</li>*/}
                         <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
-                                СТАТЬИ
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
+                            <a
+                                className="nav-link"
+                                onClick={() => navigate("/faqs")}
+                                style={{color: "#FFF", cursor: "pointer"}}
+                            >
                                 ВОПРОС – ОТВЕТ
                             </a>
                         </li>

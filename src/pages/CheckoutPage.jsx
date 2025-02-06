@@ -37,6 +37,12 @@ const CheckoutPage = () => {
     const [editedQuantity, setEditedQuantity] = useState(1);
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        window.scrollTo = () => {
+        }; // Anulează scrollTo global
+    }, []);
+
     useEffect(() => {
         if (!localCartItems?.length) {
             navigate("/");
@@ -97,11 +103,17 @@ const CheckoutPage = () => {
             alert("Произошла ошибка при оформлении заказа. Пожалуйста, попробуйте снова.");
         }
     };
+
     const handleChange = (e) => {
         setFormData((prevData) => ({
             ...prevData,
             [e.target.name]: e.target.value
         }));
+
+        // Menținem focusul pe câmpul curent fără a provoca scroll
+        if (document.activeElement === e.target) {
+            e.target.focus({preventScroll: true});
+        }
     };
 
     // Funcția pentru a începe editarea cantității unui produs

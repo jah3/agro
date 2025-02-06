@@ -66,32 +66,32 @@ const Footer = () => {
                             <div className="col-6">
                                 <h5>СТРАНИЦЫ</h5>
                                 <ul className="list-unstyled">
-                                    <li><a href="#" className="text-white text-decoration-none">Каталог</a></li>
+                                    <li><a className="nav-link" href="/store" style={{color: "#FFF"}}>
+                                        КАТАЛОГ
+                                    </a></li>
                                     <li><a onClick={() => navigate("/dostavka")}
                                            style={{color: "#FFF", cursor: "pointer"}}
                                            className="text-white text-decoration-none">Доставка и оплата</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">О нас</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Гарантии</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Контакты</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Статьи</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Вопрос-ответ</a></li>
-                                </ul>
-                            </div>
-                            <div className="col-6">
-                                <h5>ТОВАРЫ</h5>
-                                <ul className="list-unstyled">
-                                    <li><a href="#" className="text-white text-decoration-none">Плодовые деревья</a>
-                                    </li>
-                                    <li><a href="#" className="text-white text-decoration-none">Колоновидные деревья</a>
-                                    </li>
-                                    <li><a href="#" className="text-white text-decoration-none">Плодовые кустарники</a>
-                                    </li>
-                                    <li><a href="#" className="text-white text-decoration-none">Лиственные деревья</a>
-                                    </li>
-                                    <li><a href="#" className="text-white text-decoration-none">Цветы</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Крупномеры</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Декоративные
-                                        кустарники</a></li>
+                                    <li><a
+                                        className="nav-link"
+                                        onClick={() => navigate("/about-us")}
+                                        style={{color: "#FFF", cursor: "pointer"}}
+                                    >О нас</a></li>
+                                    <li><a
+                                        className="nav-link"
+                                        onClick={() => navigate("/garantii")}
+                                        style={{color: "#FFF", cursor: "pointer"}}
+                                    >Гарантии</a></li>
+                                    <li><a
+                                        className="nav-link"
+                                        onClick={() => navigate("/contacts")}
+                                        style={{color: "#FFF", cursor: "pointer"}}
+                                    >Контакты</a></li>
+                                    <li><a
+                                        className="nav-link"
+                                        onClick={() => navigate("/faqs")}
+                                        style={{color: "#FFF", cursor: "pointer"}}
+                                    >Вопрос-ответ</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ const Footer = () => {
                 <div className="row mt-5">
                     <div className="col-12 text-center">
                         <hr/>
-                        <p className="mb-0">Эко-Питомник ©, 2017 - 2025 - Все права защищены</p>
+                        <p className="mb-0">Садовый - рай ©, 2017 - 2025 - Все права защищены</p>
                     </div>
                 </div>
             </div>

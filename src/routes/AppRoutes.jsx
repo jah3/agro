@@ -6,6 +6,7 @@ import AboutUs from "../pages/AboutUs.jsx";
 import Guarantees from "../pages/Guarantees.jsx";
 import {Contact} from "lucide-react";
 import Contacts from "../pages/Contacts.jsx";
+import FAQs from "../pages/FAQs.jsx";
 
 const AppRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
             <Route path="/about-us" element={<AboutUs/>}/>
             <Route path="/garantii" element={<Guarantees/>}/>
             <Route path="/contacts" element={<Contacts/>}/>
+            <Route path="/faqs" element={<FAQs/>}/>
 
                 {/*<Route path="/order-confirmation" element={<OrderConfirmation />} />*/}
         </Routes>

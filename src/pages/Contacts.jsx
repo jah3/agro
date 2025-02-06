@@ -80,7 +80,12 @@ const Contacts = () => {
                     <h1 className="display-4 fw-bold mb-3">Оставайтесь на связи с нами</h1>
                     <p className="lead text-muted">
                         Оставьте заявку на сайте или свяжитесь с нами любым удобным для Вас способом
+
                     </p>
+                    <p className="lead text-muted">Время работы
+                        Понедельник-Воскресенье:
+                        08:00 - 20:00
+                        Без выходных</p>
                 </div>
 
                 {/* Contact Cards */}
@@ -88,14 +93,18 @@ const Contacts = () => {
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0">
                             <div className="card-body text-center">
-                                <FaMapMarkerAlt className="text-primary mb-3" size={32}/>
+                                <FaMapMarkerAlt className="mb-3" size={32} style={{color: '#5E8D66'}}/>
                                 <h3 className="card-title mb-3">Адрес</h3>
                                 <p className="card-text fs-5">
                                     Московская область<br/>
                                     село Михеево, 119
                                 </p>
-                                <a href="https://www.google.com/maps"
+                                <a href="https://www.google.com/maps/place/Eko+Pitomnik+-+Rasteniya+Dlya+Sada/@55.3791495,38.4637093,2337m/data=!3m1!1e3!4m15!1m8!3m7!1s0x414a8dd5355f11e3:0x4782cbb344cc33eb!2sMikheevo,+Regiunea+Moscova,+Rusia,+140167!3b1!8m2!3d55.3821847!4d38.4585382!16s%2Fg%2F1hb_g8rwd!3m5!1s0x414a8fbf644b56f3:0x27f5f9f5080242d0!8m2!3d55.3772504!4d38.4712046!16s%2Fg%2F11rhqk_gk6?entry=ttu&g_ep=EgoyMDI1MDIwMy4wIKXMDSoASAFQAw%3D%3D"
                                    className="btn btn-outline-primary"
+                                   style={{
+                                       color: '#5E8D66',
+                                       borderColor: '#5E8D66'
+                                   }}
                                    target="_blank"
                                    rel="noopener noreferrer">
                                     Построить маршрут
@@ -107,7 +116,7 @@ const Contacts = () => {
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0">
                             <div className="card-body text-center">
-                                <FaPhone className="text-primary mb-3" size={32}/>
+                                <FaPhone className="mb-3" size={32} style={{color: '#5E8D66'}}/>
                                 <h3 className="card-title mb-3">Телефоны</h3>
                                 <p className="card-text fs-5">
                                     +7(495)532-07-00<br/>
@@ -120,10 +129,12 @@ const Contacts = () => {
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0">
                             <div className="card-body text-center">
-                                <FaEnvelope className="text-primary mb-3" size={32}/>
+                                <FaEnvelope className="mb-3" size={32} style={{color: '#5E8D66'}}/>
                                 <h3 className="card-title mb-3">Email</h3>
                                 <p className="card-text fs-5">
-                                    <a href="mailto:info@eco-pitomnik.ru" className="text-decoration-none">
+                                    <a href="mailto:info@eco-pitomnik.ru"
+                                       className="text-decoration-none"
+                                       style={{color: '#5E8D66'}}>
                                         info@eco-pitomnik.ru
                                     </a>
                                 </p>
@@ -132,41 +143,25 @@ const Contacts = () => {
                     </div>
                 </div>
 
-                {/* Working Hours */}
-                <div className="row mb-5">
-                    <div className="col-md-8 mx-auto">
-                        <div className="card border-0 shadow-sm">
-                            <div className="card-body text-center bg-light">
-                                <h2 className="mb-4">Время работы</h2>
-                                <div className="row g-4">
-                                    <div className="col-md-6">
-                                        <p className="fs-5 mb-0">
-                                            <strong>Пн-Вс:</strong> 08:00 - 20:00<br/>
-                                            Без выходных
-                                        </p>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <p className="fs-5 mb-0">
-                                            Перед визитом согласуйте время<br/>
-                                            и наличие позиций с агрономом
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                {/* ... other content ... */}
+                <iframe width="100%" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
+                        id="gmap_canvas"
+                        src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=%D1%81%D0%B5%D0%BB%D0%BE%20%D0%9C%D0%B8%D1%85%D0%B5%D0%B5%D0%B2%D0%BE,%20119%20Moscow%20+(Location)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                <a href='https://www.acadoo.de/leistungen/ghostwriter-doktorarbeit/'>Diss Ghostwriting</a>
+                <script type='text/javascript'
+                        src='https://embedmaps.com/google-maps-authorization/script.js?id=80325c94ab0a3a3289bcefe2ac06b4dc07586543'></script>
                 {/* Centered Form */}
                 <div className="row justify-content-center mb-5">
                     <div className="col-md-8 col-lg-6">
                         <div className="card border-0 shadow-sm">
                             <div className="card-body p-4 p-md-5">
-                                <h2 className="text-center mb-4">Напишите нам</h2>
+                                <h2 className="text-center mb-4">Свяжитесь с нами</h2>
+                                <p className="lead text-muted" >Время работы
+                                    Оставьте заявку и мы свяжемся с Вами в ближайшее время!</p>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-4">
                                         <label htmlFor="name" className="form-label fs-5">
-                                            <FaPhone className="me-2"/>
+                                            <FaPhone className="me-2" style={{color: '#5E8D66'}}/>
                                             Ваше имя *
                                         </label>
                                         <input
@@ -182,7 +177,7 @@ const Contacts = () => {
 
                                     <div className="mb-4">
                                         <label htmlFor="email" className="form-label fs-5">
-                                            <FaEnvelope className="me-2"/>
+                                            <FaEnvelope className="me-2" style={{color: '#5E8D66'}}/>
                                             Ваш Email *
                                         </label>
                                         <input
@@ -198,7 +193,7 @@ const Contacts = () => {
 
                                     <div className="mb-4">
                                         <label htmlFor="phone" className="form-label fs-5">
-                                            <FaPhone className="me-2"/>
+                                            <FaPhone className="me-2" style={{color: '#5E8D66'}}/>
                                             Ваш телефон *
                                         </label>
                                         <input
@@ -239,7 +234,7 @@ const Contacts = () => {
                                     </div>
 
                                     <div className="d-grid">
-                                        <button type="submit" className="btn btn-primary btn-lg">
+                                        <button type="submit" className="btn btn-success btn-lg">
                                             Отправить сообщение
                                         </button>
                                     </div>
