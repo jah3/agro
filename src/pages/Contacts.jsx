@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FaPhone, FaEnvelope, FaMapMarkerAlt} from 'react-icons/fa';
+import emailjs from 'emailjs-com';
 import NavigationBar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import BottomNavigationBar from '../components/BottomNavigationBar';
@@ -21,6 +22,11 @@ const Contacts = () => {
     useEffect(() => {
         Cookies.set('cartItems', JSON.stringify(cartItems), {expires: 7});
     }, [cartItems]);
+
+    useEffect(() => {
+        window.scrollTo = () => {
+        }; // Anulează scrollTo global
+    }, []);
 
     const handleSearchQueryChange = (query) => {
         setSearchQuery(query);
@@ -63,8 +69,34 @@ const Contacts = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormSubmitted(true);
-        // You can add further functionality to handle form submission (e.g., send to an API)
+
+        emailjs.init(import.meta.env.VITE_APP_EMAILJS_CONTACTS_EMAIL_DATA_KEY);
+
+        emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_CONTACTS_EMAIL_DATA_KEY,
+            {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                message: formData.message
+            },
+            import.meta.env.VITE_APP_EMAILJS_EMAIL_DATA_KEY
+        )
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                setFormSubmitted(true);
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    message: ''
+                });
+            })
+            .catch((err) => {
+                console.error('FAILED...', err);
+                alert('A apărut o eroare la trimiterea formularului. Vă rugăm încercați din nou.');
+            });
     };
 
     return (
@@ -156,7 +188,7 @@ const Contacts = () => {
                         <div className="card border-0 shadow-sm">
                             <div className="card-body p-4 p-md-5">
                                 <h2 className="text-center mb-4">Свяжитесь с нами</h2>
-                                <p className="lead text-muted" >Время работы
+                                <p className="lead text-muted">Время работы
                                     Оставьте заявку и мы свяжемся с Вами в ближайшее время!</p>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-4">

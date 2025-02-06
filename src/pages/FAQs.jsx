@@ -49,39 +49,56 @@ const FAQs = () => {
             <NavigationBar/>
             <div className="container my-5 flex-grow-1">
                 <h1 className="text-center mb-4 text-dark">Часто задаваемые вопросы</h1>
-                <Accordion>
+
+                <Accordion className="w-100" defaultActiveKey="0">
                     {faqs.map((faq, index) => (
-                        <Card key={index} className="mb-3 border-0">
-                            <Accordion.Item eventKey={String(index)}>
-                                <Accordion.Header
-                                    style={{
-                                        textDecoration: 'none',
-                                        transition: 'background-color 0.3s ease',
-                                    }}
-                                    className="faq-header"
-                                    onMouseEnter={(e) => {
-                                        e.target.style.backgroundColor = '#f2f2f2';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.target.style.backgroundColor = 'transparent';
-                                    }}
-                                >
-                                    <Button
-                                        variant="link"
-                                        className="text-dark fs-5"
-                                        style={{textDecoration: 'none'}}
-                                    >
-                                        {faq.question}
-                                    </Button>
-                                </Accordion.Header>
-                                <Accordion.Body className="text-dark">
-                                    {faq.answer}
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Card>
+                        <Accordion.Item
+                            key={index}
+                            eventKey={String(index)}
+                            className="mb-3 border-0"
+                        >
+                            <Accordion.Header
+                                className="fs-5"
+                                style={{
+                                    transition: 'background-color 0.3s ease',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                {faq.question}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                {faq.answer}
+                            </Accordion.Body>
+                        </Accordion.Item>
                     ))}
                 </Accordion>
+
+                {/* Stiluri custom */}
+                <style>
+                    {`
+                    .accordion-item {
+                            border: 1px solid #e5e7eb !important;
+                            border-radius: 12px !important;
+                            margin-bottom: 1rem !important;
+                            overflow: hidden;
+                            transition: all 0.3s ease;
+                        }
+                    
+                        .accordion-button:not(.collapsed) {
+                            background-color: #5E8D66 !important;
+                            color: white !important;
+                        }
+                        .accordion-button:hover {
+                            background-color: #5E8D66 !important;
+                            color: white;
+                        }
+                        .accordion-button:focus {
+                            box-shadow: none !important;
+                        }
+                    `}
+                </style>
             </div>
+
             <Footer/>
             <BottomNavigationBar/>
         </div>

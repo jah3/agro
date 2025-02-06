@@ -376,6 +376,8 @@ const CheckoutPage = () => {
                                     <div className="mb-3">
                                         <label className="form-label">Телефон *</label>
                                         <input
+                                            inputMode={"tel"}
+                                            type="tel"
                                             name="phone"
                                             className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                                             value={formData.phone}
