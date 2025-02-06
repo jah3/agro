@@ -1,13 +1,60 @@
-import React from 'react';
-import {Truck, CreditCard, MapPin, Clock, CheckCircle} from 'react-feather'; // Iconițe
-import NavigationBar from "../components/NavigationBar";
-import Footer from "../components/Footer";
-import BottomNavigationBar from "../components/BottomNavigationBar.jsx";
+import React, { useState, useEffect } from 'react';
+import { Truck, CreditCard, MapPin, Clock, CheckCircle } from 'react-feather';
+import NavigationBar from '../components/NavigationBar';
+import Footer from '../components/Footer';
+import BottomNavigationBar from '../components/BottomNavigationBar.jsx';
+import productsData from '../data/products.json';
+import Cookies from 'js-cookie';
+import {useNavigate} from "react-router-dom";
 
 const Dostavka = () => {
+    const [cartItems, setCartItems] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [showNotification, setShowNotification] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedCartItems = Cookies.get('cartItems');
+        if (savedCartItems) setCartItems(JSON.parse(savedCartItems));
+    }, []);
+
+    useEffect(() => {
+        Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
+    }, [cartItems]);
+
+    const handleSearchQueryChange = (query) => {
+        setSearchQuery(query);
+        if (!query.trim()) return setSearchResults([]);
+
+        const results = Object.values(productsData).flatMap(category =>
+            category.subcategories ?
+                Object.values(category.subcategories).flatMap(subcategory =>
+                    subcategory.products?.filter(product =>
+                        product.name.toLowerCase().includes(query.toLowerCase())
+                    ) || []
+                ) : []
+        );
+        setSearchResults(results);
+    };
+
+    const handleSearchResultClick = (product) => {
+        setSelectedProduct(product);
+        navigate(`/product/${product.id}`);
+    };
+
+    const removeFromCart = (item) => {
+        setCartItems(prevItems => prevItems.filter(cartItem => cartItem.id !== item.id));
+    };
+
     return (
         <div className="d-flex flex-column min-vh-100">
-            <NavigationBar/>
+            <NavigationBar
+                cartItems={cartItems}
+                removeFromCart={removeFromCart}
+                productsData={productsData}
+            />
 
             <main className="flex-grow-1">
                 <div className="container mt-4 mb-5">
@@ -112,7 +159,14 @@ const Dostavka = () => {
                     </div>
                 </div>
             </main>
-            <BottomNavigationBar/>
+            <BottomNavigationBar
+                cartItemsCount={cartItems.length}
+                favoritesCount={0}
+                searchResults={searchResults}
+                onSearchQueryChange={handleSearchQueryChange}
+                onResultClick={handleSearchResultClick}
+            />
+
             <Footer/>
         </div>
     );

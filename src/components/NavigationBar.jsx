@@ -282,17 +282,29 @@ const NavigationBar = ({
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
+                            <a
+                                className="nav-link"
+                                onClick={() => navigate("/about-us")}
+                                style={{color: "#FFF", cursor: "pointer"}}
+                            >
                                 О НАС
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
+                            <a
+                                className="nav-link"
+                                onClick={() => navigate("/garantii")}
+                                style={{color: "#FFF", cursor: "pointer"}}
+                            >
                                 ГАРАНТИИ
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" style={{color: "#FFF"}}>
+                            <a
+                                className="nav-link"
+                                onClick={() => navigate("/contacts")}
+                                style={{color: "#FFF", cursor: "pointer"}}
+                            >
                                 КОНТАКТЫ
                             </a>
                         </li>

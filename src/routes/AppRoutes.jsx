@@ -2,6 +2,10 @@ import {Navigate, Routes, Route} from "react-router-dom";
 import HomePage from "../pages/HomePage.jsx";
 import CheckoutPage from "../pages/CheckoutPage.jsx";
 import Dostavka from "../pages/Dostavka.jsx";
+import AboutUs from "../pages/AboutUs.jsx";
+import Guarantees from "../pages/Guarantees.jsx";
+import {Contact} from "lucide-react";
+import Contacts from "../pages/Contacts.jsx";
 
 const AppRoutes = () => {
     return (
@@ -13,6 +17,10 @@ const AppRoutes = () => {
             <Route path="/product/:id" element={<HomePage/>}/>
             <Route path="/checkout" element={<CheckoutPage/>}/>
             <Route path="/dostavka" element={<Dostavka/>}/>
+            <Route path="/about-us" element={<AboutUs/>}/>
+            <Route path="/garantii" element={<Guarantees/>}/>
+            <Route path="/contacts" element={<Contacts/>}/>
+
                 {/*<Route path="/order-confirmation" element={<OrderConfirmation />} />*/}
         </Routes>
     );
