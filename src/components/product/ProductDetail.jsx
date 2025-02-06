@@ -1,5 +1,5 @@
 // ProductDetail.jsx
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Heart} from "lucide-react";
 
 const ProductDetail = ({product, handleBack, addToCart}) => {
@@ -20,6 +20,10 @@ const ProductDetail = ({product, handleBack, addToCart}) => {
         plantFeatures: "Особенности растения",
         location: "Местоположение"
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });
 
     const calculatePrice = () => {
         const basePrice = product.priceByAge[selectedAge];

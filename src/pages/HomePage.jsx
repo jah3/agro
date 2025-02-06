@@ -136,7 +136,15 @@ const HomePage = () => {
                 )
                 : [...prevItems, newItem];
 
+            // Salvare în cookie cu expirare 7 zile
+            Cookies.set('cartItems', JSON.stringify(updatedItems), {
+                expires: 7,
+                secure: true,
+                sameSite: 'strict'
+            });
+
             setShowNotification(true);
+            window.location.reload(); // Face refresh la pagină
             setTimeout(() => setShowNotification(false), 2000);
             return updatedItems;
         });
@@ -197,6 +205,11 @@ const HomePage = () => {
         navigate(`/product/${product.id}`);
     };
 
+    const [globalCart, setGlobalCart] = useState(() => {
+        const savedCart = Cookies.get('cartItems');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
     return (
         <div className="d-flex flex-column min-vh-100">
             {showNotification && (
@@ -209,9 +222,15 @@ const HomePage = () => {
             )}
 
             <NavigationBar
-                cartItems={cartItems}
-                removeFromCart={removeFromCart}
-                productsData={productsData}
+                cartItems={globalCart}
+                removeFromCart={(item) => {
+                    const updated = globalCart.filter(cartItem => !(
+                        cartItem.id === item.id &&
+                        cartItem.age === item.age &&
+                        cartItem.serviceType === item.serviceType
+                    ));
+                    setGlobalCart(updated);
+                }}
             />
 
             <main className="flex-grow-1">

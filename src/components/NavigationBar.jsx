@@ -1,7 +1,7 @@
-import {useState, useEffect} from "react";
-import {Menu, X, Heart, ShoppingCart, Trash2} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Heart, ShoppingCart, Trash2 } from "lucide-react";
 import Cookies from "js-cookie";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavigationBar = ({
                            cartItems = [],
@@ -16,59 +16,62 @@ const NavigationBar = ({
     const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
 
-    const totalAmount = cartItems.reduce(
+    // Inițializare coș din cookie-uri
+    const [localCartItems, setLocalCartItems] = useState(() => {
+        const savedCart = Cookies.get("cartItems");
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+    const totalAmount = localCartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
     );
 
     useEffect(() => {
-        Cookies.set("cartItems", JSON.stringify(cartItems), {expires: 7});
+        // Sincronizare starea locală cu prop-urile
+        setLocalCartItems(cartItems);
+    }, [cartItems]);
+
+    useEffect(() => {
+        // Salvarea în cookie-uri la fiecare modificare
+        Cookies.set("cartItems", JSON.stringify(localCartItems), { expires: 7 });
+
         const checkMobile = () => {
             setIsMobile(window.innerWidth <= 668);
         };
-        // Initial check
         checkMobile();
-
-        // Add resize listener
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
-    }, [cartItems]);
+    }, [localCartItems]);
 
     const searchProducts = (query) => {
         if (!query || !productsData) return [];
-
-        const results = [];
-        Object.values(productsData).forEach((category) => {
-            Object.values(category.subcategories || {}).forEach((subcategory) => {
-                (subcategory.products || []).forEach((product) => {
-                    if (product.name?.toLowerCase().includes(query.toLowerCase())) {
-                        results.push(product);
-                    }
-                });
-            });
-        });
-        return results;
+        return Object.values(productsData)
+            .flatMap((category) =>
+                Object.values(category.subcategories || {}).flatMap(
+                    (subcategory) => subcategory.products || []
+                )
+            )
+            .filter((product) =>
+                product.name?.toLowerCase().includes(query.toLowerCase())
+            );
     };
 
     useEffect(() => {
-        if (searchQuery.trim()) {
-            setSearchResults(searchProducts(searchQuery));
-        } else {
-            setSearchResults([]);
-        }
+        setSearchResults(searchQuery.trim() ? searchProducts(searchQuery) : []);
     }, [searchQuery]);
 
-    const handleProductRedirect = (product) => {
-        setSearchQuery("");
-        navigate(`/product/${product.id}`);
-    };
-
     const handleRemoveFromCart = (item) => {
-        removeFromCart(item);
-        const updatedCartItems = cartItems.filter(
-            (cartItem) => cartItem.id !== item.id
+        const updatedCart = localCartItems.filter(
+            (cartItem) =>
+                !(
+                    cartItem.id === item.id &&
+                    cartItem.age === item.age &&
+                    cartItem.serviceType === item.serviceType
+                )
         );
-        Cookies.set("cartItems", JSON.stringify(updatedCartItems), {expires: 7});
+        setLocalCartItems(updatedCart);
+        if (removeFromCart) removeFromCart(item);
     };
 
     return (
