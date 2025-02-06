@@ -377,13 +377,14 @@ const CheckoutPage = () => {
                                         <label className="form-label">Телефон *</label>
                                         <input
                                             inputMode={"tel"}
-                                            type="tel"
+                                            inputMode="numeric"
                                             name="phone"
                                             className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                                             value={formData.phone}
                                             onChange={handleChange}
                                             placeholder="Например: 79991234567"
                                         />
+
                                         {errors.phone && (
                                             <div className="invalid-feedback">{errors.phone}</div>
                                         )}
