@@ -229,10 +229,11 @@ const Contacts = () => {
                                             Ваш телефон *
                                         </label>
                                         <input
-                                            type="text"
+                                            inputMode={"tel"}
+                                            inputMode="numeric"
+                                            name="phone"
                                             className="form-control form-control-lg"
                                             id="phone"
-                                            name="phone"
                                             required
                                             value={formData.phone}
                                             onChange={handleChange}

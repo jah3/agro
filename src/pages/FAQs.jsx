@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import NavigationBar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import BottomNavigationBar from '../components/BottomNavigationBar';
 import {Accordion, Card, Button} from 'react-bootstrap';
+
+import {Truck, CreditCard, MapPin, Clock, CheckCircle} from 'react-feather';
+
+import productsData from '../data/products.json';
+import Cookies from 'js-cookie';
+import {useNavigate} from "react-router-dom";
 
 const faqs = [
     {
@@ -44,9 +50,54 @@ const faqs = [
 ];
 
 const FAQs = () => {
+
+    const [cartItems, setCartItems] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [showNotification, setShowNotification] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedCartItems = Cookies.get('cartItems');
+        if (savedCartItems) setCartItems(JSON.parse(savedCartItems));
+    }, []);
+
+    useEffect(() => {
+        Cookies.set('cartItems', JSON.stringify(cartItems), {expires: 7});
+    }, [cartItems]);
+
+    const handleSearchQueryChange = (query) => {
+        setSearchQuery(query);
+        if (!query.trim()) return setSearchResults([]);
+
+        const results = Object.values(productsData).flatMap(category =>
+            category.subcategories ?
+                Object.values(category.subcategories).flatMap(subcategory =>
+                    subcategory.products?.filter(product =>
+                        product.name.toLowerCase().includes(query.toLowerCase())
+                    ) || []
+                ) : []
+        );
+        setSearchResults(results);
+    };
+
+    const handleSearchResultClick = (product) => {
+        setSelectedProduct(product);
+        navigate(`/product/${product.id}`);
+    };
+
+    const removeFromCart = (item) => {
+        setCartItems(prevItems => prevItems.filter(cartItem => cartItem.id !== item.id));
+    };
+
     return (
         <div className="d-flex flex-column min-vh-100">
-            <NavigationBar/>
+            <NavigationBar
+                cartItems={cartItems}
+                removeFromCart={removeFromCart}
+                productsData={productsData}
+            />
             <div className="container my-5 flex-grow-1">
                 <h1 className="text-center mb-4 text-dark">Часто задаваемые вопросы</h1>
 
@@ -99,8 +150,14 @@ const FAQs = () => {
                 </style>
             </div>
 
+            <BottomNavigationBar
+                cartItemsCount={cartItems.length}
+                favoritesCount={0}
+                searchResults={searchResults}
+                onSearchQueryChange={handleSearchQueryChange}
+                onResultClick={handleSearchResultClick}
+            />
             <Footer/>
-            <BottomNavigationBar/>
         </div>
     );
 };

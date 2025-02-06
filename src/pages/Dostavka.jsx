@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Truck, CreditCard, MapPin, Clock, CheckCircle } from 'react-feather';
+import React, {useState, useEffect} from 'react';
+import {Truck, CreditCard, MapPin, Clock, CheckCircle} from 'react-feather';
 import NavigationBar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import BottomNavigationBar from '../components/BottomNavigationBar.jsx';
@@ -21,7 +21,7 @@ const Dostavka = () => {
     }, []);
 
     useEffect(() => {
-        Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
+        Cookies.set('cartItems', JSON.stringify(cartItems), {expires: 7});
     }, [cartItems]);
 
     const handleSearchQueryChange = (query) => {
@@ -166,7 +166,6 @@ const Dostavka = () => {
                 onSearchQueryChange={handleSearchQueryChange}
                 onResultClick={handleSearchResultClick}
             />
-
             <Footer/>
         </div>
     );
