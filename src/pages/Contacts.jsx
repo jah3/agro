@@ -179,7 +179,7 @@ const Contacts = () => {
                 <iframe width="100%" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
                         id="gmap_canvas"
                         src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=%D1%81%D0%B5%D0%BB%D0%BE%20%D0%9C%D0%B8%D1%85%D0%B5%D0%B5%D0%B2%D0%BE,%20119%20Moscow%20+(Location)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                <a href='https://www.acadoo.de/leistungen/ghostwriter-doktorarbeit/'>Diss Ghostwriting</a>
+                <a href='https://www.acadoo.de/leistungen/ghostwriter-doktorarbeit/'></a>
                 <script type='text/javascript'
                         src='https://embedmaps.com/google-maps-authorization/script.js?id=80325c94ab0a3a3289bcefe2ac06b4dc07586543'></script>
                 {/* Centered Form */}
