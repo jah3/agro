@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import {useParams, useNavigate, useLocation} from "react-router-dom";
 import Cookies from 'js-cookie';
 import NavigationBar from "../components/NavigationBar";
 import productsData from "../data/products.json";
@@ -12,18 +12,22 @@ import ProductDetail from "../components/product/ProductDetail";
 import Dostavka from "./Dostavka.jsx";
 
 const HomePage = () => {
-    const { category: urlCategory, subcategory: urlSubcategory, id: productId } = useParams();
+    const {category: urlCategory, subcategory: urlSubcategory, id: productId} = useParams();
     const navigate = useNavigate();
     const location = useLocation();
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [showNotification, setShowNotification] = useState(false);
+
+    const [cartItems, setCartItems] = useState(() => {
+        const savedCart = Cookies.get('cartItems');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
 
     // Effect to detect back button press
     useEffect(() => {
@@ -84,7 +88,7 @@ const HomePage = () => {
                         setSelectedSubcategory(foundSubcategory);
                         setSelectedProduct(foundProduct);
                     } else {
-                        navigate("/", { replace: true });
+                        navigate("/", {replace: true});
                     }
                 }
             } catch (error) {
@@ -98,9 +102,6 @@ const HomePage = () => {
         loadInitialState();
     }, [productId, navigate]);
 
-    useEffect(() => {
-        Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-    }, [cartItems]);
 
     const calculatePrice = (product, age, serviceType) => {
         const basePrice = product.priceByAge[age];
@@ -108,7 +109,8 @@ const HomePage = () => {
     };
 
     const addToCart = (product, age, serviceType, quantity) => {
-        const price = calculatePrice(product, age, serviceType);
+        const price = product.priceByAge[age] || product.min_price;
+
         const existingItem = cartItems.find(item =>
             item.id === product.id &&
             item.age === age &&
@@ -116,13 +118,14 @@ const HomePage = () => {
         );
 
         const newItem = {
-            ...product,
-            quantity,
-            age,
-            price,
-            serviceType,
+            id: product.id,
+            name: product.name,
             image: product.image,
-            min_price: product.min_price
+            age: Number(age),
+            serviceType: serviceType,
+            price: Number(String(price).replace(/[^0-9]/g, "")),
+            quantity: Number(quantity),
+            min_price: Number(String(product.min_price).replace(/[^0-9]/g, ""))
         };
 
         setCartItems(prevItems => {
@@ -131,25 +134,28 @@ const HomePage = () => {
                     item.id === newItem.id &&
                     item.age === newItem.age &&
                     item.serviceType === newItem.serviceType
-                        ? { ...item, quantity: item.quantity + newItem.quantity }
+                        ? {...item, quantity: item.quantity + newItem.quantity}
                         : item
                 )
                 : [...prevItems, newItem];
 
-            // Salvare în cookie cu expirare 7 zile
+            // Salvare cookie cu verificare dublă
             Cookies.set('cartItems', JSON.stringify(updatedItems), {
                 expires: 7,
-                secure: true,
-                sameSite: 'strict'
+                path: '/',
+                secure: false,
+                sameSite: 'Lax',
+                domain: window.location.hostname
             });
 
-            setShowNotification(true);
-            window.location.reload(); // Face refresh la pagină
-            setTimeout(() => setShowNotification(false), 2000);
+            // Forțează actualizarea cookie-ului
+            document.cookie = `cartItems=${encodeURIComponent(JSON.stringify(updatedItems))}; expires=${new Date(Date.now() + 7 * 864e5).toUTCString()}; path=/`;
+
             return updatedItems;
         });
     };
 
+//window.location.reload(); // Face refresh la pagină
     const removeFromCart = (item) => {
         setCartItems(prevItems => prevItems.filter(cartItem => cartItem.id !== item.id));
     };
@@ -215,28 +221,28 @@ const HomePage = () => {
             {showNotification && (
                 <div
                     className="alert alert-success position-fixed start-50 translate-middle-x mb-3"
-                    style={{ zIndex: 9999, minWidth: "300px" }}
+                    style={{zIndex: 9999, minWidth: "300px"}}
                 >
                     Товар успешно добавлен в корзину!
                 </div>
             )}
 
             <NavigationBar
-                cartItems={globalCart}
+                cartItems={cartItems}
                 removeFromCart={(item) => {
-                    const updated = globalCart.filter(cartItem => !(
+                    setCartItems(prevItems => prevItems.filter(cartItem => !(
                         cartItem.id === item.id &&
                         cartItem.age === item.age &&
                         cartItem.serviceType === item.serviceType
-                    ));
-                    setGlobalCart(updated);
+                    )));
                 }}
+                productsData={productsData}
             />
 
             <main className="flex-grow-1">
                 <div className="container mt-4 mb-5">
                     {location.pathname.includes('/dostavka') ? (
-                        <Dostavka />
+                        <Dostavka/>
                     ) : isLoading ? (
                         <div className="text-center my-5">
                             <div className="spinner-border text-success" role="status">
@@ -280,7 +286,7 @@ const HomePage = () => {
                 onResultClick={handleSearchResultClick}
             />
 
-            <Footer />
+            <Footer/>
         </div>
     );
 };

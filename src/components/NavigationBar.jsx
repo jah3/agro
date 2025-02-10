@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Heart, ShoppingCart, Trash2 } from "lucide-react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useDebounce } from 'use-debounce';
 
 const NavigationBar = ({
                            cartItems = [],
@@ -12,9 +13,18 @@ const NavigationBar = ({
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [debouncedQuery] = useDebounce(searchQuery, 300);
     const [searchResults, setSearchResults] = useState([]);
     const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
+
+    // Funcția pentru redirecționare
+    const handleProductRedirect = (product) => {
+        navigate(`/product/${product.id}`);
+        setSearchQuery("");
+        setIsSidebarOpen(false);
+        setIsCartOpen(false);
+    };
 
     // Inițializare coș din cookie-uri
     const [localCartItems, setLocalCartItems] = useState(() => {
@@ -28,12 +38,10 @@ const NavigationBar = ({
     );
 
     useEffect(() => {
-        // Sincronizare starea locală cu prop-urile
         setLocalCartItems(cartItems);
     }, [cartItems]);
 
     useEffect(() => {
-        // Salvarea în cookie-uri la fiecare modificare
         Cookies.set("cartItems", JSON.stringify(localCartItems), { expires: 7 });
 
         const checkMobile = () => {
@@ -58,22 +66,12 @@ const NavigationBar = ({
     };
 
     useEffect(() => {
-        setSearchResults(searchQuery.trim() ? searchProducts(searchQuery) : []);
-    }, [searchQuery]);
+        setSearchResults(debouncedQuery.trim() ? searchProducts(debouncedQuery) : []);
+    }, [debouncedQuery]);
 
     const handleRemoveFromCart = (item) => {
-        const updatedCart = localCartItems.filter(
-            (cartItem) =>
-                !(
-                    cartItem.id === item.id &&
-                    cartItem.age === item.age &&
-                    cartItem.serviceType === item.serviceType
-                )
-        );
-        setLocalCartItems(updatedCart);
-        if (removeFromCart) removeFromCart(item);
+        removeFromCart(item); // Acum folosește direct funcția din props
     };
-
     return (
         <div>
             {/* Search Bar and Cart - Desktop */}
@@ -108,9 +106,9 @@ const NavigationBar = ({
                                 overflowY: "auto",
                             }}
                         >
-                            {searchResults.map((product, index) => (
+                            {searchResults.map((product) => (
                                 <div
-                                    key={index}
+                                    key={product.id}
                                     className="d-flex align-items-center p-3 border-bottom"
                                     style={{cursor: "pointer"}}
                                     onClick={() => handleProductRedirect(product)}
@@ -142,7 +140,6 @@ const NavigationBar = ({
                         Поиск
                     </button>
 
-                    {/* În NavigationBar.jsx - secțiunea desktop */}
                     <div className="d-flex align-items-center ms-3">
                         <Heart
                             className="icon"
