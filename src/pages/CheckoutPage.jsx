@@ -1,10 +1,11 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Edit2} from "lucide-react";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 import BottomNavigationBar from "../components/BottomNavigationBar";
 import emailjs from "emailjs-com";
+import productsData from "../data/products.json";
 
 const CheckoutPage = () => {
     const location = useLocation();
@@ -151,7 +152,8 @@ const CheckoutPage = () => {
     return (
         <div className="d-flex flex-column min-vh-100">
             {/* Navigația de sus */}
-            <NavigationBar/>
+            <NavigationBar
+            />
 
             <main className="flex-grow-1">
                 <div className="container py-5">
