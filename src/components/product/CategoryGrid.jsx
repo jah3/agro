@@ -1,6 +1,8 @@
 // CategoryGrid.jsx
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { motion } from "framer-motion";
+
 
 const CategoryGrid = ({ productsData, handleCategorySelect }) => {
     const carouselImages = [
