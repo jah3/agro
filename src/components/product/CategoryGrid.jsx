@@ -1,7 +1,5 @@
 // CategoryGrid.jsx
 import React from "react";
-// import { motion } from "framer-motion";
-import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CategoryGrid = ({ productsData, handleCategorySelect }) => {
@@ -41,22 +39,6 @@ const CategoryGrid = ({ productsData, handleCategorySelect }) => {
                     </motion.div>
                 ))}
             </div>
-
-            {/*/!* Carousel Section *!/*/}
-            {/*<div className="mt-5">*/}
-            {/*    <Carousel>*/}
-            {/*        {carouselImages.map((image, idx) => (*/}
-            {/*            <Carousel.Item key={idx}>*/}
-            {/*                <img*/}
-            {/*                    className="d-block w-100"*/}
-            {/*                    src={image}*/}
-            {/*                    alt={`Slide ${idx + 1}`}*/}
-            {/*                    style={{ height: "300px", objectFit: "cover", borderRadius: "12px" }}*/}
-            {/*                />*/}
-            {/*            </Carousel.Item>*/}
-            {/*        ))}*/}
-            {/*    </Carousel>*/}
-            {/*</div>*/}
         </div>
     );
 };
