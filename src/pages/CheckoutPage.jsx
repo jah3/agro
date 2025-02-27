@@ -20,7 +20,7 @@ const CheckoutPage = () => {
         (acc, item) => acc + item.price * item.quantity,
         0
     );
-    const deliveryCost = 500;
+    const deliveryCost = 0;
     const total = computedTotalAmount + deliveryCost;
 
     const [formData, setFormData] = useState({
@@ -248,7 +248,8 @@ const CheckoutPage = () => {
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <span>Доставка:</span>
-                                            <span>{deliveryCost} руб</span>
+                                            {/*<span>{deliveryCost} руб</span>*/}
+                                            <span>Уточняйте у менеджера</span>
                                         </div>
                                         <hr/>
                                         <div className="d-flex justify-content-between fs-5 fw-bold">

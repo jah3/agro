@@ -180,7 +180,7 @@ const NavigationBar = ({
             <nav
                 className="navbar navbar-expand-lg navbar-dark"
                 style={{
-                    backgroundColor: "#5E8D66",
+                    backgroundColor: "#648c94",
                     width: "80%",
                     margin: "10px auto",
                     borderRadius: "15px",

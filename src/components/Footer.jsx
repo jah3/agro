@@ -9,7 +9,7 @@ const Footer = () => {
     });
 
     return (
-        <footer className="text-white py-5" style={{backgroundColor: "#5E8D66"}}>
+        <footer className="text-white py-5" style={{backgroundColor: "#648c94"}}>
             <div className="container">
                 <div className="row g-4">
                     {/* Adresă și contact */}

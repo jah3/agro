@@ -136,11 +136,11 @@ const FAQs = () => {
                         }
                     
                         .accordion-button:not(.collapsed) {
-                            background-color: #5E8D66 !important;
+                            background-color: #648c94 !important;
                             color: white !important;
                         }
                         .accordion-button:hover {
-                            background-color: #5E8D66 !important;
+                            background-color: #648c94 !important;
                             color: white;
                         }
                         .accordion-button:focus {
