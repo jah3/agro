@@ -133,7 +133,7 @@ const BottomNavigationBar = ({
                 <nav
                     className="navbar navbar-dark d-flex justify-content-center align-items-center"
                     style={{
-                        backgroundColor: "#5E8D66",
+                        backgroundColor: "#648c94",
                         borderRadius: "20px",
                         padding: "12px 10px",
                         width: "100%",
@@ -186,7 +186,7 @@ const BottomNavigationBar = ({
                                         style={{
                                             width: "44px",
                                             height: "44px",
-                                            backgroundColor: "#9F684B",
+                                            backgroundColor: "#648c94",
                                             color: "#FFF",
                                             display: "flex",
                                             justifyContent: "center",

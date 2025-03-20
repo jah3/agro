@@ -127,7 +127,7 @@ const AboutUs = () => {
 
                     <div className="row mt-5">
                         <div className="col-12">
-                            <div className="p-5 rounded-3" style={{ backgroundColor: '#5E8D66', color: 'white' }}>
+                            <div className="p-5 rounded-3" style={{ backgroundColor: '#648c94', color: 'white' }}>
                                 <h2 className="text-center mb-4">Наша основная цель</h2>
                                 <p className="fs-5 text-center mb-0">
                                     Наша миссия — предоставлять садоводам разнообразие саженцев по доступным ценам, развивать питомник и постоянно расширять ассортимент, чтобы каждый клиент мог найти то, что ищет.

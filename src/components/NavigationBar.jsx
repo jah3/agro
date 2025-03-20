@@ -135,7 +135,7 @@ const NavigationBar = ({
                     <button
                         className="btn btn-outline-success"
                         type="button"
-                        style={{backgroundColor: "#9F684B", color: "#FFF"}}
+                        style={{backgroundColor: "#648c94", color: "#FFF", borderRadius: " 0 5px 5px 0"}}
                     >
                         Поиск
                     </button>
@@ -143,14 +143,14 @@ const NavigationBar = ({
                     <div className="d-flex align-items-center ms-3">
                         <Heart
                             className="icon"
-                            style={{color: "#9F684B", marginRight: "10px"}}
+                            style={{color: "#648c94", marginRight: "10px"}}
                         />
                         <div
                             className="position-relative"
                             onClick={() => setIsCartOpen(!isCartOpen)}
                             style={{marginRight: "15px"}}
                         >
-                            <ShoppingCart className="icon" style={{color: "#9F684B"}}/>
+                            <ShoppingCart className="icon" style={{color: "#648c94"}}/>
                             {cartItems.length > 0 && (
                                 <div
                                     style={{
