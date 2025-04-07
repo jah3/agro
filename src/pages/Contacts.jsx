@@ -95,7 +95,7 @@ const Contacts = () => {
             })
             .catch((err) => {
                 console.error('FAILED...', err);
-                alert('A apărut o eroare la trimiterea formularului. Vă rugăm încercați din nou.');
+                alert('При отправке формы произошла ошибка. Пожалуйста, попробуйте еще раз.');
             });
     };
 
@@ -128,10 +128,9 @@ const Contacts = () => {
                                 <FaMapMarkerAlt className="mb-3" size={32} style={{color: '#5E8D66'}}/>
                                 <h3 className="card-title mb-3">Адрес</h3>
                                 <p className="card-text fs-5">
-                                    Московская область<br/>
-                                    село Михеево, 119
+                                    Раменский район Загорного-2
                                 </p>
-                                <a href="https://www.google.com/maps/place/Eko+Pitomnik+-+Rasteniya+Dlya+Sada/@55.3791495,38.4637093,2337m/data=!3m1!1e3!4m15!1m8!3m7!1s0x414a8dd5355f11e3:0x4782cbb344cc33eb!2sMikheevo,+Regiunea+Moscova,+Rusia,+140167!3b1!8m2!3d55.3821847!4d38.4585382!16s%2Fg%2F1hb_g8rwd!3m5!1s0x414a8fbf644b56f3:0x27f5f9f5080242d0!8m2!3d55.3772504!4d38.4712046!16s%2Fg%2F11rhqk_gk6?entry=ttu&g_ep=EgoyMDI1MDIwMy4wIKXMDSoASAFQAw%3D%3D"
+                                <a href="https://yandex.ru/navi/?whatshere%5Bzoom%5D=18&whatshere%5Bpoint%5D=38.302121%2C55.524664&si=ewj08nx1c348k0mk073uhphpbr"
                                    className="btn btn-outline-primary"
                                    style={{
                                        color: '#5E8D66',
@@ -151,8 +150,8 @@ const Contacts = () => {
                                 <FaPhone className="mb-3" size={32} style={{color: '#5E8D66'}}/>
                                 <h3 className="card-title mb-3">Телефоны</h3>
                                 <p className="card-text fs-5">
-                                    +7(495)532-07-00<br/>
-                                    +7(926)239-63-83
+                                    +7(<br/>
+                                    +7(
                                 </p>
                             </div>
                         </div>
@@ -176,9 +175,13 @@ const Contacts = () => {
                 </div>
 
                 {/* ... other content ... */}
-                <iframe width="100%" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
-                        id="gmap_canvas"
-                        src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=%D1%81%D0%B5%D0%BB%D0%BE%20%D0%9C%D0%B8%D1%85%D0%B5%D0%B5%D0%B2%D0%BE,%20119%20Moscow%20+(Location)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                <iframe
+                    src="https://yandex.ru/map-widget/v1/?ll=38.302121%2C55.524664&z=18&pt=38.302121,55.524664,pm2rdm"
+                    width="100%"
+                    height="400"
+                    frameborder="0"
+                    allowfullscreen
+                ></iframe>
                 <a href='https://www.acadoo.de/leistungen/ghostwriter-doktorarbeit/'></a>
                 <script type='text/javascript'
                         src='https://embedmaps.com/google-maps-authorization/script.js?id=80325c94ab0a3a3289bcefe2ac06b4dc07586543'></script>

@@ -91,7 +91,7 @@ const AboutUs = () => {
                     </div>
 
                     <div className="bg-light py-5 rounded-3">
-                        <h2 className="text-center mb-4 display-5 fw-bold">Питомник ЭКО-ПИТОМНИК — это:</h2>
+                        <h2 className="text-center mb-4 display-5 fw-bold">Питомник это:</h2>
                         <div className="row text-center">
                             <div className="col-md-3">
                                 <Counter end={17} text="лет на рынке"/>
